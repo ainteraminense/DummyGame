@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     public float superPowerIncrease = 5f;
 
+    public float SuperPowerRemaining { get => superPowerRemaining; set => superPowerRemaining = value; }
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -22,12 +24,12 @@ public class Player : MonoBehaviour
         IsGrounded();
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            if (superPowerRemaining > 0)
+            if (SuperPowerRemaining > 0)
             {
                 strength += superPowerIncrease; // use the superpower amount
                 rigidbody.AddForce(Vector3.up * strength, ForceMode.Impulse);
                 strength -= superPowerIncrease; // after using return to the normal jump
-                superPowerRemaining--; // spend the amount of one superpower 'coin'
+                SuperPowerRemaining--; // spend the amount of one superpower 'coin'
                 return;
             }
             // make the player jump when space is pressed
@@ -42,13 +44,18 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Fall") || other.CompareTag("Fireball" ))
         {
             FindObjectOfType<GameManager>().GameOver(); // if player fall, end the game
-            FindObjectOfType<Camera>().gameObject.transform.parent = null;
+            //FindObjectOfType<Camera>().gameObject.transform.parent = null;
+            //gameObject.SetActive(false);
         }
-
-        else
+        else if (other.CompareTag("Coin"))
+        {
+            FindObjectOfType<GameManager>().IncreaseScore();
+            Destroy(other.gameObject);
+        }
+        else if(other.CompareTag("superJump"))
         {
             Destroy(other.gameObject); // when get the coins
-            superPowerRemaining++; // when the player gets the object he earns count of one sumperPower (super jump) 
+            SuperPowerRemaining++; // when the player gets the object he earns count of one sumperPower (super jump) 
         }
     }
 
