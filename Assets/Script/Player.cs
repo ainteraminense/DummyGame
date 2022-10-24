@@ -2,23 +2,31 @@
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private LayerMask playerLayer;
-    private new Rigidbody rigidbody;
+    //VARIABLES    
     private float direction;
-    private float strength = 7f;
     private bool isGrounded = true;
     private float superPowerRemaining = 0;
-    private CapsuleCollider capsuleCollider;
+    private float SuperPowerRemaining { get => superPowerRemaining; set => superPowerRemaining = value; }
 
+    public float strength = 7f;
     public float superPowerIncrease = 5f;
 
-    public float SuperPowerRemaining { get => superPowerRemaining; set => superPowerRemaining = value; }
-
+    //REFERENCES
+    [SerializeField] private LayerMask playerLayer;
+    private new Rigidbody rigidbody;
+    private CapsuleCollider capsuleCollider;
+    private Vector3 velocity = Vector3.zero;
+    //private CharacterController characterController;
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
     }
+
+    //private void Start()
+    //{
+    //    characterController = GetComponent<CharacterController>();
+    //}
     private void Update()
     {
         IsGrounded();
@@ -36,6 +44,18 @@ public class Player : MonoBehaviour
             rigidbody.AddForce(Vector3.up*strength, ForceMode.Impulse);
         }
         direction = Input.GetAxis("Horizontal");
+        //if (direction < 0)
+        //{
+        transform.forward = new Vector3(0, 0, direction);
+        FindObjectOfType<Camera>().transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + new Vector3 (0, 0, -10f), ref velocity, 0.3f);
+        //}
+        //else if (direction > 0)
+        //{
+        //    transform.Rotate(Vector3.right * Time.deltaTime);
+        //}
+        //Vector3 moveX = new Vector3(direction, 0, 0);
+        
+        //characterController.Move(moveX);
         transform.position += new Vector3(direction, 0, 0) * Time.deltaTime;       
     }
 
@@ -73,5 +93,9 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+    private void Move()
+    {
+
     }
 }
