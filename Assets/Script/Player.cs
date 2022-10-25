@@ -16,17 +16,12 @@ public class Player : MonoBehaviour
     private new Rigidbody rigidbody;
     private CapsuleCollider capsuleCollider;
     private Vector3 velocity = Vector3.zero;
-    //private CharacterController characterController;
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
-    //private void Start()
-    //{
-    //    characterController = GetComponent<CharacterController>();
-    //}
     private void Update()
     {
         IsGrounded();
@@ -44,18 +39,11 @@ public class Player : MonoBehaviour
             rigidbody.AddForce(Vector3.up*strength, ForceMode.Impulse);
         }
         direction = Input.GetAxis("Horizontal");
-        //if (direction < 0)
-        //{
         transform.forward = new Vector3(0, 0, direction);
-        FindObjectOfType<Camera>().transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + new Vector3 (0, 0, -10f), ref velocity, 0.3f);
-        //}
-        //else if (direction > 0)
-        //{
-        //    transform.Rotate(Vector3.right * Time.deltaTime);
-        //}
-        //Vector3 moveX = new Vector3(direction, 0, 0);
-        
-        //characterController.Move(moveX);
+
+        //It is better to use camera reference instead
+        FindObjectOfType<Camera>().transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + new Vector3 (0, 0, -10f), ref velocity, 0.3f); 
+
         transform.position += new Vector3(direction, 0, 0) * Time.deltaTime;       
     }
 
@@ -64,8 +52,6 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Fall") || other.CompareTag("Fireball" ))
         {
             FindObjectOfType<GameManager>().GameOver(); // if player fall, end the game
-            //FindObjectOfType<Camera>().gameObject.transform.parent = null;
-            //gameObject.SetActive(false);
         }
         else if (other.CompareTag("Coin"))
         {
@@ -93,9 +79,5 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
         }
-    }
-    private void Move()
-    {
-
     }
 }
