@@ -13,9 +13,15 @@ public class Player : MonoBehaviour
 
     //REFERENCES
     [SerializeField] private LayerMask playerLayer;
+    private Animator anim;
     private new Rigidbody rigidbody;
     private CapsuleCollider capsuleCollider;
     private Vector3 velocity = Vector3.zero;
+
+    private void Start()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -38,13 +44,18 @@ public class Player : MonoBehaviour
             // make the player jump when space is pressed
             rigidbody.AddForce(Vector3.up*strength, ForceMode.Impulse);
         }
-        direction = Input.GetAxis("Horizontal");
-        transform.forward = new Vector3(0, 0, direction);
 
-        //It is better to use camera reference instead
-        FindObjectOfType<Camera>().transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + new Vector3 (0, 0, -10f), ref velocity, 0.3f); 
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            Walk();
+            MoveCamera();
+        }
+        else
+        {
+            Idle();
+        }
 
-        transform.position += new Vector3(direction, 0, 0) * Time.deltaTime;       
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -79,5 +90,22 @@ public class Player : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    private void Idle()
+    {
+        anim.SetFloat("Speed", 0f, 0.1f, Time.deltaTime);
+    }
+    private void Walk()
+    {
+        anim.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+        direction = Input.GetAxis("Horizontal");
+        transform.forward = new Vector3(0, 0, direction);
+        transform.position += new Vector3(direction, 0, 0) * Time.deltaTime;
+    }
+    private void MoveCamera()
+    {
+        //It is better to use camera reference instead
+        FindObjectOfType<Camera>().transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + new Vector3(0, 0, -10f), ref velocity, 0.3f);
     }
 }
