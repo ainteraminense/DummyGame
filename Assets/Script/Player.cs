@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Fall") || other.CompareTag("Fireball" ))
         {
-            //FindObjectOfType<GameManager>().GameOver(); // if player fall, end the game
+            FindObjectOfType<GameManager>().GameOver(); // if player fall, end the game
         }
         else if (other.CompareTag("Coin"))
         {

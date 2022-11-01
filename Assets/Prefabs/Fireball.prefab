@@ -108,6 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
+  prefab: {fileID: 8301654607820776544, guid: 9ee7127e5edf29d4982d57d2d85ad082, type: 3}
 --- !u!114 &-8627708270511917198
 MonoBehaviour:
   m_ObjectHideFlags: 0
