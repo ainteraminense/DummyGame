@@ -1545,7 +1545,7 @@ GameObject:
   - component: {fileID: 1790155377}
   m_Layer: 0
   m_Name: Level
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1876,6 +1876,11 @@ PrefabInstance:
     - target: {fileID: 7171461319950962114, guid: 53a42d8086e6e694db6f19525b552efc,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171461319950962114, guid: 53a42d8086e6e694db6f19525b552efc,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7171461319950962116, guid: 53a42d8086e6e694db6f19525b552efc,

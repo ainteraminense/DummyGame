@@ -8,6 +8,7 @@ TagManager:
   - Fireball
   - Coin
   - superJump
+  - Floor
   layers:
   - Default
   - TransparentFX
