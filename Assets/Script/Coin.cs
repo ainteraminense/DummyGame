@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    public float speed = 50f;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,6 @@ public class Coin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Rotate(Vector3.up*Time.deltaTime*speed, Space.World);
     }
 }

@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     public float strength = 7f;
     public float superPowerIncrease = 5f;
+    public Vector3 offset = new Vector3(0, 0, -5f);
 
     //REFERENCES
     [SerializeField] private LayerMask playerLayer;
@@ -106,6 +107,6 @@ public class Player : MonoBehaviour
     private void MoveCamera()
     {
         //It is better to use camera reference instead
-        FindObjectOfType<Camera>().transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + new Vector3(0, 0, -10f), ref velocity, 0.3f);
+        FindObjectOfType<Camera>().transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + offset, ref velocity, 0.3f);
     }
 }
