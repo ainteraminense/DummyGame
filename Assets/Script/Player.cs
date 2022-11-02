@@ -18,10 +18,11 @@ public class Player : MonoBehaviour
     private new Rigidbody rigidbody;
     private CapsuleCollider capsuleCollider;
     private Vector3 velocity = Vector3.zero;
-
+    private Camera camera;
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        camera = FindObjectOfType<Camera>();
     }
     private void Awake()
     {
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Fall") || other.CompareTag("Fireball" ))
         {
-            FindObjectOfType<GameManager>().GameOver(); // if player fall, end the game
+            //FindObjectOfType<GameManager>().GameOver(); // if player fall, end the game
         }
         else if (other.CompareTag("Coin"))
         {
@@ -107,6 +108,6 @@ public class Player : MonoBehaviour
     private void MoveCamera()
     {
         //It is better to use camera reference instead
-        FindObjectOfType<Camera>().transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + offset, ref velocity, 0.3f);
-    }
+        camera.transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + offset, ref velocity, 0.3f);
+    } 
 }
