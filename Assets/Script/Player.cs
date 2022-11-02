@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         IsGrounded();
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) // jump if player is touching the ground
         {
             if (SuperPowerRemaining > 0)
             {
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
     }
     private void MoveCamera()
     {
-        //It is better to use camera reference instead
+        // camera follows player
         camera.transform.position = Vector3.SmoothDamp(FindObjectOfType<Camera>().transform.position, transform.position + offset, ref velocity, 0.3f);
     } 
 }

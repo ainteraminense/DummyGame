@@ -60,25 +60,11 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(0);
         }
-        //score = 0;
-
-        //playerRigidbody.AddForce(Vector3.zero); // stop moving player and situate him at initial position
-        //player.transform.position = new Vector3(0, 1.11f, 0);
         player.enabled = true;
-        //player.SuperPowerRemaining = 0;
-
-        //if (superJump != null)
-        //{
-        //    Destroy(superJump.gameObject); // destroy any remaining super jump from previous round
-        //}
-        //superJump = Instantiate(prefab, new Vector3(2.5f, 1.95f, 0f), Quaternion.identity) as GameObject; // situate super jump at its initial position
-
-        //if (true)
-        //{
-        //    //Destroy fireball instances
-        //}
     }
-
+    /// <summary>
+    /// when player collect coin increase score
+    /// </summary>
     public void IncreaseScore()
     {
         score++;
