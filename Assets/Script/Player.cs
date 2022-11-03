@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private float superPowerRemaining = 0;
     private float SuperPowerRemaining { get => superPowerRemaining; set => superPowerRemaining = value; }
 
+    public string message;
     public float strength = 7f;
     public float superPowerIncrease = 5f;
     public Vector3 offset = new Vector3(0, 0, -5f);
@@ -19,10 +20,14 @@ public class Player : MonoBehaviour
     private CapsuleCollider capsuleCollider;
     private Vector3 velocity = Vector3.zero;
     private Camera camera;
+    private PopUpBox popUpBox;
+    private Chest chest;
     private void Start()
     {
         anim = GetComponentInChildren<Animator>();
         camera = FindObjectOfType<Camera>();
+        popUpBox = FindObjectOfType<GameManager>().GetComponent<PopUpBox>();
+        chest = FindObjectOfType<Chest>();
     }
     private void Awake()
     {
@@ -56,8 +61,11 @@ public class Player : MonoBehaviour
         {
             Idle();
         }
+        if (Mathf.Abs(chest.transform.position.x - transform.position.x) < 1f)
+        {
+            popUpBox.GetComponent<PopUpBox>().PopUp(message);
+        }
 
-        
     }
 
     private void OnTriggerEnter(Collider other)

@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject prefab;
 
     private int score;
-    private Rigidbody playerRigidbody;
-    private GameObject superJump;
+    //private Rigidbody playerRigidbody;
+    //private GameObject superJump;
     bool gameHasEnded = false;
 
     public Player player;
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        playerRigidbody = player.GetComponent<Rigidbody>();
+        //playerRigidbody = player.GetComponent<Rigidbody>();
     }
     public void Play()
     {
