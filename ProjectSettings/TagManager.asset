@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - superJump
   - Floor
+  - chest
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     private bool isGrounded = true;
     private float superPowerRemaining = 0;
     private float SuperPowerRemaining { get => superPowerRemaining; set => superPowerRemaining = value; }
+    private bool isMessageRead = false;
 
     public string message;
     public float strength = 7f;
@@ -61,9 +62,10 @@ public class Player : MonoBehaviour
         {
             Idle();
         }
-        if (Mathf.Abs(chest.transform.position.x - transform.position.x) < 1f)
+        if (Mathf.Abs(chest.transform.position.x - transform.position.x) < 1f && !isMessageRead)
         {
             popUpBox.GetComponent<PopUpBox>().PopUp(message);
+            isMessageRead = true;
         }
 
     }
