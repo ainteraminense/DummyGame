@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private float SuperPowerRemaining { get => superPowerRemaining; set => superPowerRemaining = value; }
     private bool isMessageRead = false;
 
-    public string message;
+    public string message = "ajndjadsnajdn";
     public float strength = 7f;
     public float superPowerIncrease = 5f;
     public Vector3 offset = new Vector3(0, 0, -5f);
